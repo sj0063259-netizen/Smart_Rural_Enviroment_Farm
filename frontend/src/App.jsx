@@ -1,16 +1,17 @@
 import Navbar from "./components/common/Navbar";
+import Hero from "./components/landing/Hero";
+import Footer from "./components/common/Footer";
 
 function App() {
   return (
-    <div className="min-h-screen bg-slate-900">
+    <div className="min-h-screen bg-[#0F172A] text-white antialiased">
       <Navbar />
 
-      {/* Temporary content so you can see the navbar */}
-      <main className="pt-20 flex items-center justify-center min-h-screen">
-        <h1 className="text-4xl font-bold text-white">
-          Smart Rural Environment & Farm Safety Platform
-        </h1>
+      <main className="pt-20">
+        <Hero />
       </main>
+
+      <Footer />
     </div>
   );
 }

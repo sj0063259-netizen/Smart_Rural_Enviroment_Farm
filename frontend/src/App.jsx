@@ -1,5 +1,8 @@
 import Navbar from "./components/common/Navbar";
 import Hero from "./components/landing/Hero";
+import Platform from "./components/platform/Platform";
+import Technology from "./components/technology/Technology";
+import Team from "./components/team/Team";
 import Footer from "./components/common/Footer";
 
 function App() {
@@ -7,8 +10,11 @@ function App() {
     <div className="min-h-screen bg-[#0F172A] text-white antialiased">
       <Navbar />
 
-      <main className="pt-20">
+      <main>
         <Hero />
+        <Platform />
+        <Technology />
+        <Team />
       </main>
 
       <Footer />

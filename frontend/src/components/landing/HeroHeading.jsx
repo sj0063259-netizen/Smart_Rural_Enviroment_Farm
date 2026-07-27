@@ -1,11 +1,11 @@
 export default function HeroHeading() {
   return (
-    <div className="mx-auto mt-12 max-w-5xl text-center">
-      <h1 className="text-5xl md:text-6xl xl:text-7xl leading-none pb-3 font-black text-white">
+    <div className="mx-auto max-w-5xl text-center">
+      <h1 className="text-5xl font-black leading-none text-white md:text-6xl xl:text-7xl">
         Farm<span className="text-green-400">Safe</span>
       </h1>
 
-      <h2 className="mt-6 text-2xl font-semibold text-slate-200 md:text-3xl">
+      <h2 className="mt-8 text-2xl font-semibold text-slate-200 md:text-3xl">
         Real-Time Rural Environment Monitoring Platform
       </h2>
 
@@ -14,7 +14,7 @@ export default function HeroHeading() {
         monitoring.
       </p>
 
-      <p className="mx-auto mt-3 max-w-3xl text-base leading-7 text-slate-500">
+      <p className="mx-auto mt-4 max-w-3xl text-base leading-7 text-slate-500">
         Detect fire hazards • Monitor soil moisture • Track climate conditions •
         Receive instant alerts
       </p>

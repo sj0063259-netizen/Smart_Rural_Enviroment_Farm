@@ -22,14 +22,7 @@ import {
 } from "../../layouts/layout";
 
 import SectionHeader from "../common/SectionHeader";
-
-const SENSOR_CARDS = [
-  { icon: Thermometer, label: "Temperature", value: "24.6°C" },
-  { icon: Droplets, label: "Humidity", value: "62%" },
-  { icon: Sprout, label: "Soil Moisture", value: "48%" },
-  { icon: Flame, label: "Fire", value: "Clear" },
-  { icon: BatteryFull, label: "Battery", value: "92%" },
-];
+import { useSensor } from "../../context/SensorContext";
 
 const CHART_BARS = [40, 65, 50, 80, 60, 90, 70];
 
@@ -55,6 +48,51 @@ const ALERTS = [
 ];
 
 function DashboardPreview() {
+  const sensorData = useSensor();
+
+  const SENSOR_CARDS = [
+    {
+      icon: Thermometer,
+      label: "Temperature",
+      value:
+        sensorData.temperature !== null
+          ? `${sensorData.temperature}°C`
+          : "--",
+    },
+    {
+      icon: Droplets,
+      label: "Humidity",
+      value:
+        sensorData.humidity !== null
+          ? `${sensorData.humidity}%`
+          : "--",
+    },
+    {
+      icon: Sprout,
+      label: "Soil Moisture",
+      value:
+        sensorData.soil !== null
+          ? `${sensorData.soil}%`
+          : "--",
+    },
+    {
+      icon: Flame,
+      label: "Air Quality",
+      value:
+        sensorData.airQuality !== null
+          ? sensorData.airQuality
+          : "--",
+    },
+    {
+      icon: BatteryFull,
+      label: "Battery",
+      value:
+        sensorData.battery !== null
+          ? `${sensorData.battery}%`
+          : "--",
+    },
+  ];
+
   return (
     <section className={`${BG_PRIMARY} ${SECTION_Y}`}>
       <div className={CONTAINER}>
@@ -69,14 +107,25 @@ function DashboardPreview() {
           {/* Node Status */}
           <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#334155] pb-6">
             <div className="flex items-center gap-2">
-              <span className="h-2.5 w-2.5 rounded-full bg-green-500 animate-pulse"></span>
+              <span
+                className={`h-2.5 w-2.5 rounded-full ${
+                  sensorData.connected
+                    ? "bg-green-500 animate-pulse"
+                    : "bg-red-500"
+                }`}
+              ></span>
+
               <span className="text-white font-medium text-sm sm:text-base">
-                3 Nodes Online
+                {sensorData.connected
+                  ? "ESP32 Connected"
+                  : "Waiting for ESP32..."}
               </span>
             </div>
 
             <span className="text-xs sm:text-sm text-[#94A3B8]">
-              Last Sync: Just Now
+              {sensorData.connected
+                ? "Live Data"
+                : "No Sensor Data"}
             </span>
           </div>
 
@@ -168,8 +217,16 @@ function DashboardPreview() {
               </span>
             </div>
 
-            <span className="text-sm sm:text-base font-semibold text-green-500">
-              Operational
+            <span
+              className={`text-sm sm:text-base font-semibold ${
+                sensorData.connected
+                  ? "text-green-500"
+                  : "text-red-500"
+              }`}
+            >
+              {sensorData.connected
+                ? "Operational"
+                : "Waiting"}
             </span>
           </div>
         </div>

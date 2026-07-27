@@ -6,42 +6,58 @@ import {
   TrendingUp,
 } from "lucide-react";
 
-const sensors = [
-  {
-    icon: Thermometer,
-    title: "Temperature",
-    value: "28°C",
-    status: "+2°C Today",
-    color: "text-orange-400",
-    bg: "bg-orange-500/10",
-  },
-  {
-    icon: Droplets,
-    title: "Humidity",
-    value: "67%",
-    status: "Optimal",
-    color: "text-cyan-400",
-    bg: "bg-cyan-500/10",
-  },
-  {
-    icon: Sprout,
-    title: "Soil Moisture",
-    value: "52%",
-    status: "Healthy",
-    color: "text-green-400",
-    bg: "bg-green-500/10",
-  },
-  {
-    icon: Flame,
-    title: "Fire Risk",
-    value: "Safe",
-    status: "0 Alerts",
-    color: "text-red-400",
-    bg: "bg-red-500/10",
-  },
-];
+import { useSensor } from "../../context/SensorContext";
 
 export default function SensorCards() {
+  const sensorData = useSensor();
+
+  const sensors = [
+    {
+      icon: Thermometer,
+      title: "Temperature",
+      value:
+        sensorData.temperature !== null
+          ? `${sensorData.temperature}°C`
+          : "--",
+      status: sensorData.connected ? "Live Data" : "Waiting...",
+      color: "text-orange-400",
+      bg: "bg-orange-500/10",
+    },
+    {
+      icon: Droplets,
+      title: "Humidity",
+      value:
+        sensorData.humidity !== null
+          ? `${sensorData.humidity}%`
+          : "--",
+      status: sensorData.connected ? "Live Data" : "Waiting...",
+      color: "text-cyan-400",
+      bg: "bg-cyan-500/10",
+    },
+    {
+      icon: Sprout,
+      title: "Soil Moisture",
+      value:
+        sensorData.soil !== null
+          ? `${sensorData.soil}%`
+          : "--",
+      status: sensorData.connected ? "Healthy" : "Waiting...",
+      color: "text-green-400",
+      bg: "bg-green-500/10",
+    },
+    {
+      icon: Flame,
+      title: "Air Quality",
+      value:
+        sensorData.airQuality !== null
+          ? sensorData.airQuality
+          : "--",
+      status: sensorData.connected ? "Live Data" : "Waiting...",
+      color: "text-red-400",
+      bg: "bg-red-500/10",
+    },
+  ];
+
   return (
     <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
       {sensors.map((sensor) => {
@@ -53,18 +69,22 @@ export default function SensorCards() {
             className="group rounded-3xl border border-slate-700/60 bg-[#0F172A]/80 p-6 transition-all duration-300 hover:-translate-y-2 hover:border-green-500/40 hover:shadow-xl hover:shadow-green-500/10"
           >
             <div className="flex items-center justify-between">
-
               <div
                 className={`flex h-14 w-14 items-center justify-center rounded-2xl ${sensor.bg}`}
               >
                 <Icon className={sensor.color} size={28} />
               </div>
 
-              <div className="flex items-center gap-1 rounded-full bg-green-500/10 px-3 py-1 text-xs font-medium text-green-400">
+              <div
+                className={`flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium ${
+                  sensorData.connected
+                    ? "bg-green-500/10 text-green-400"
+                    : "bg-red-500/10 text-red-400"
+                }`}
+              >
                 <TrendingUp size={12} />
-                Live
+                {sensorData.connected ? "Live" : "Offline"}
               </div>
-
             </div>
 
             <p className="mt-6 text-sm text-slate-400">
@@ -78,7 +98,6 @@ export default function SensorCards() {
             <p className="mt-4 text-sm text-slate-500">
               {sensor.status}
             </p>
-
           </div>
         );
       })}

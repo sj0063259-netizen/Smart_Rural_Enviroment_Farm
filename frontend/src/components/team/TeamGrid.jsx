@@ -10,8 +10,8 @@ const teamMembers = [
 
     skills: ["ESP32", "Embedded C", "IoT", "Sensors"],
 
-    github: "#",
-    linkedin: "#",
+    github: "https://github.com/amanchaudhary63067-cmd",
+    linkedin: "www.linkedin.com/in/aman-chaudhary-839206380",
   },
 
   {
@@ -36,8 +36,8 @@ const teamMembers = [
 
     skills: ["ESP32", "IoT", "Sensors", "Testing"],
 
-    github: "#",
-    linkedin: "#",
+    github: "https://github.com/himanshu-027",
+    linkedin: "https://www.linkedin.com/in/himanshu-prajapati-883612376/",
   },
 
   {
@@ -49,8 +49,8 @@ const teamMembers = [
 
     skills: ["Embedded", "PCB", "Electronics", "IoT"],
 
-    github: "#",
-    linkedin: "#",
+    github: "https://github.com/aryanverma-017",
+    linkedin: "https://www.linkedin.com/in/aryan-verma-704b1a386/",
   },
 ];
 

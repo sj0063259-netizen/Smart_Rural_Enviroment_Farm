@@ -1,4 +1,9 @@
 function validateSensorData(data) {
+
+    if (!data) {
+        return "Request body is missing.";
+    }
+
     const requiredFields = [
         "temperature",
         "humidity",

@@ -1,8 +1,21 @@
-import { Wifi, Clock3, Activity } from "lucide-react";
+import {
+  Wifi,
+  Clock3,
+  Activity,
+  Bot,
+  CheckCircle2,
+} from "lucide-react";
+
+import { useSensor } from "../../context/SensorContext";
 
 export default function DashboardHeader() {
+  const sensorData = useSensor();
+
+  const lastUpdated = sensorData.lastUpdated ?? "Waiting...";
+  const connected = sensorData.connected;
+
   return (
-    <div className="flex flex-col gap-5 border-b border-slate-700/60 pb-6 lg:flex-row lg:items-center lg:justify-between">
+    <div className="flex flex-col gap-6 border-b border-slate-700/60 pb-6 lg:flex-row lg:items-center lg:justify-between">
 
       {/* Left */}
       <div>
@@ -13,36 +26,108 @@ export default function DashboardHeader() {
           </span>
         </div>
 
-        <h3 className="mt-3 text-2xl font-bold text-white">
+        <h3 className="mt-3 text-3xl font-bold text-white">
           Farm Environment Monitoring
         </h3>
 
-        <p className="mt-2 text-slate-400">
-          Real-time monitoring of environmental conditions, safety alerts,
-          and sensor health.
+        <p className="mt-2 max-w-xl text-slate-400">
+          Real-time monitoring of environmental conditions,
+          smart irrigation, and IoT device health.
         </p>
       </div>
 
       {/* Right */}
-      <div className="flex flex-wrap items-center gap-3">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
 
-        <div className="flex items-center gap-2 rounded-full border border-green-500/20 bg-green-500/10 px-4 py-2">
-          <Wifi size={16} className="text-green-400" />
-          <span className="text-sm font-medium text-green-400">
-            System Online
-          </span>
+        {/* System Status */}
+        <div
+          className={`flex items-center gap-2 rounded-xl border px-4 py-3 ${
+            connected
+              ? "border-green-500/20 bg-green-500/10"
+              : "border-red-500/20 bg-red-500/10"
+          }`}
+        >
+          <Wifi
+            size={18}
+            className={
+              connected ? "text-green-400" : "text-red-400"
+            }
+          />
+
+          <div>
+            <p className="text-xs text-slate-400">
+              System
+            </p>
+
+            <p
+              className={`font-semibold ${
+                connected
+                  ? "text-green-400"
+                  : "text-red-400"
+              }`}
+            >
+              {connected ? "Online" : "Offline"}
+            </p>
+          </div>
         </div>
 
-        <div className="flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-2">
-          <Activity size={16} className="text-cyan-400" />
-          <span className="text-sm font-medium text-cyan-400">
-            ESP32 Connected
-          </span>
+        {/* ESP32 */}
+        <div className="flex items-center gap-2 rounded-xl border border-cyan-500/20 bg-cyan-500/10 px-4 py-3">
+
+          <Activity
+            size={18}
+            className="text-cyan-400"
+          />
+
+          <div>
+            <p className="text-xs text-slate-400">
+              Controller
+            </p>
+
+            <p className="font-semibold text-cyan-400">
+              {connected
+                ? "ESP32 Connected"
+                : "Waiting..."}
+            </p>
+          </div>
         </div>
 
-        <div className="flex items-center gap-2 text-sm text-slate-400">
-          <Clock3 size={15} />
-          Updated 2 sec ago
+        {/* Automation */}
+        <div className="flex items-center gap-2 rounded-xl border border-violet-500/20 bg-violet-500/10 px-4 py-3">
+
+          <Bot
+            size={18}
+            className="text-violet-400"
+          />
+
+          <div>
+            <p className="text-xs text-slate-400">
+              Automation
+            </p>
+
+            <p className="font-semibold text-violet-400">
+              AUTO MODE
+            </p>
+          </div>
+        </div>
+
+        {/* Last Update */}
+        <div className="flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-800/50 px-4 py-3">
+
+          <Clock3
+            size={18}
+            className="text-yellow-400"
+          />
+
+          <div>
+            <p className="text-xs text-slate-400">
+              Last Update
+            </p>
+
+            <p className="font-semibold text-white">
+              {lastUpdated}
+            </p>
+          </div>
         </div>
 
       </div>

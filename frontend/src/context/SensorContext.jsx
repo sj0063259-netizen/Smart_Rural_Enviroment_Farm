@@ -11,18 +11,36 @@ export function SensorProvider({ children }) {
     soil: null,
     airQuality: null,
     battery: null,
+
     connected: false,
+    lastUpdated: null,
+
+    // Stores last 20 readings for charts
+    history: [],
   });
 
   useEffect(() => {
-    // Load latest data from backend
     async function loadLatestData() {
       const response = await getLatestData();
 
       if (response && response.success) {
+        const currentTime = new Date().toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+        });
+
         setSensorData({
           ...response.data,
           connected: true,
+          lastUpdated: currentTime,
+
+          history: [
+            {
+              ...response.data,
+              time: currentTime,
+            },
+          ],
         });
       }
     }
@@ -33,18 +51,32 @@ export function SensorProvider({ children }) {
     socket.on("sensorData", (data) => {
       console.log("📡 Live Sensor Data:", data);
 
-      setSensorData({
-        ...data,
-        connected: true,
+      const currentTime = new Date().toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
       });
+
+      setSensorData((prev) => ({
+        ...data,
+
+        connected: true,
+        lastUpdated: currentTime,
+
+        history: [
+          ...prev.history,
+          {
+            ...data,
+            time: currentTime,
+          },
+        ].slice(-20),
+      }));
     });
 
-    // Socket connected
     socket.on("connect", () => {
       console.log("🟢 Connected to Backend");
     });
 
-    // Socket disconnected
     socket.on("disconnect", () => {
       console.log("🔴 Backend Disconnected");
 

@@ -11,6 +11,9 @@ import {
   AlertTriangle,
   CheckCircle2,
   Activity,
+  Bot,
+  Power,
+  Clock,
 } from "lucide-react";
 
 import {
@@ -49,7 +52,30 @@ const ALERTS = [
 
 function DashboardPreview() {
   const sensorData = useSensor();
+// -------------------------------------
+// Smart Irrigation Status
+// -------------------------------------
 
+const pumpStatus = sensorData.pumpStatus ?? false;
+
+const automationMode = sensorData.mode ?? "AUTO";
+
+const soilCondition =
+  sensorData.soil == null
+    ? "Waiting..."
+    : sensorData.soil < 35
+    ? "Dry"
+    : "Optimal";
+
+const irrigationAction =
+  !sensorData.connected
+    ? "Waiting for Sensor Data"
+    : pumpStatus
+    ? "Irrigation Running"
+    : "Monitoring Soil Moisture";
+
+const lastUpdated =
+  sensorData.lastUpdated ?? "--:--:--";
   const SENSOR_CARDS = [
     {
       icon: Thermometer,
@@ -153,7 +179,171 @@ function DashboardPreview() {
               </div>
             ))}
           </div>
+{/* Smart Irrigation Automation */}
 
+<div className={`${TILE} mt-2 p-6`}>
+
+  <div className="flex items-center justify-between">
+
+    <div className="flex items-center gap-3">
+
+      <Bot size={22} className="text-green-500" />
+
+      <div>
+
+        <h3 className="text-white font-semibold text-lg">
+
+          Smart Irrigation Automation
+
+        </h3>
+
+        <p className="text-sm text-[#94A3B8]">
+
+          Automatic irrigation based on real-time soil moisture.
+
+        </p>
+
+      </div>
+
+    </div>
+
+    <span
+      className={`rounded-full px-3 py-1 text-xs font-semibold ${
+        automationMode === "AUTO"
+          ? "bg-blue-500/20 text-blue-400"
+          : "bg-yellow-500/20 text-yellow-400"
+      }`}
+    >
+
+      {automationMode}
+
+    </span>
+
+  </div>
+
+  <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+
+    {/* Pump */}
+
+    <div className="rounded-xl bg-[#0F172A] p-4">
+
+      <div className="flex items-center gap-2">
+
+        <Power
+          size={18}
+          className={
+            pumpStatus
+              ? "text-green-500"
+              : "text-gray-500"
+          }
+        />
+
+        <span className="text-sm text-[#CBD5E1]">
+
+          Water Pump
+
+        </span>
+
+      </div>
+
+      <p
+        className={`mt-3 text-lg font-bold ${
+          pumpStatus
+            ? "text-green-400"
+            : "text-gray-400"
+        }`}
+      >
+
+        {pumpStatus ? "🟢 ON" : "⚪ OFF"}
+
+      </p>
+
+    </div>
+
+    {/* Soil */}
+
+    <div className="rounded-xl bg-[#0F172A] p-4">
+
+      <div className="flex items-center gap-2">
+
+        <Sprout
+          size={18}
+          className="text-green-500"
+        />
+
+        <span className="text-sm text-[#CBD5E1]">
+
+          Soil Status
+
+        </span>
+
+      </div>
+
+      <p className="mt-3 text-lg font-bold text-white">
+
+        {soilCondition}
+
+      </p>
+
+    </div>
+
+    {/* Action */}
+
+    <div className="rounded-xl bg-[#0F172A] p-4">
+
+      <div className="flex items-center gap-2">
+
+        <Droplets
+          size={18}
+          className="text-cyan-400"
+        />
+
+        <span className="text-sm text-[#CBD5E1]">
+
+          Current Action
+
+        </span>
+
+      </div>
+
+      <p className="mt-3 text-lg font-bold text-white">
+
+        {irrigationAction}
+
+      </p>
+
+    </div>
+
+    {/* Last Update */}
+
+    <div className="rounded-xl bg-[#0F172A] p-4">
+
+      <div className="flex items-center gap-2">
+
+        <Clock
+          size={18}
+          className="text-yellow-400"
+        />
+
+        <span className="text-sm text-[#CBD5E1]">
+
+          Last Update
+
+        </span>
+
+      </div>
+
+      <p className="mt-3 text-lg font-bold text-white">
+
+        {lastUpdated}
+
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
           {/* Chart */}
           <div className={`${TILE} p-5`}>
             <p className="text-sm text-[#94A3B8]">

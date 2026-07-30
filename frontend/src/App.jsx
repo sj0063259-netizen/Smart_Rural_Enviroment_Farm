@@ -3,6 +3,7 @@ import Hero from "./components/landing/Hero";
 import Platform from "./components/platform/Platform";
 import Technology from "./components/technology/Technology";
 import Team from "./components/team/Team";
+import CropAdvisor from "./components/cropAdvisor/CropAdvisor";
 import Footer from "./components/common/Footer";
 
 import { SensorProvider } from "./context/SensorContext";
@@ -17,6 +18,7 @@ function App() {
           <Hero />
           <Platform />
           <Technology />
+          <CropAdvisor/>
           <Team />
         </main>
 

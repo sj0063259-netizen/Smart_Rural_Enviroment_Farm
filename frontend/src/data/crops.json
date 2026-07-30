@@ -1,0 +1,210 @@
+{
+  "crops": [
+    {
+      "id": 1,
+      "name": "Rice",
+      "emoji": "🌾",
+      "season": "Kharif",
+      "duration": "120-150 Days",
+
+      "idealConditions": {
+        "temperature": {
+          "min": 25,
+          "max": 35
+        },
+        "humidity": {
+          "min": 70,
+          "max": 90
+        },
+        "soilMoisture": {
+          "min": 70,
+          "max": 90
+        }
+      },
+
+      "water": {
+        "requirement": "25-30 mm/day",
+        "bestTime": "6:00 AM - 8:00 AM",
+        "frequency": "Daily"
+      },
+
+      "fertilizer": {
+        "nitrogen": "Recommended after irrigation",
+        "phosphorus": "Apply during early growth",
+        "potassium": "Apply during flowering"
+      },
+
+      "soilType": "Clay or Loamy",
+
+      "description": "Rice requires high moisture and warm climatic conditions."
+    },
+
+    {
+      "id": 2,
+      "name": "Wheat",
+      "emoji": "🌾",
+      "season": "Rabi",
+      "duration": "110-130 Days",
+
+      "idealConditions": {
+        "temperature": {
+          "min": 15,
+          "max": 25
+        },
+        "humidity": {
+          "min": 40,
+          "max": 70
+        },
+        "soilMoisture": {
+          "min": 40,
+          "max": 60
+        }
+      },
+
+      "water": {
+        "requirement": "15-20 mm/day",
+        "bestTime": "7:00 AM",
+        "frequency": "Every 3 Days"
+      },
+
+      "fertilizer": {
+        "nitrogen": "Apply after first irrigation",
+        "phosphorus": "Recommended before sowing",
+        "potassium": "Optional"
+      },
+
+      "soilType": "Loamy",
+
+      "description": "Wheat grows best in cool weather and moderate soil moisture."
+    },
+
+    {
+      "id": 3,
+      "name": "Maize",
+      "emoji": "🌽",
+      "season": "Kharif",
+
+      "duration": "90-120 Days",
+
+      "idealConditions": {
+        "temperature": {
+          "min": 20,
+          "max": 30
+        },
+
+        "humidity": {
+          "min": 50,
+          "max": 80
+        },
+
+        "soilMoisture": {
+          "min": 50,
+          "max": 70
+        }
+      },
+
+      "water": {
+        "requirement": "20 mm/day",
+        "bestTime": "Morning",
+        "frequency": "Every 2 Days"
+      },
+
+      "fertilizer": {
+        "nitrogen": "Required",
+        "phosphorus": "Required",
+        "potassium": "Required"
+      },
+
+      "soilType": "Well-drained Loamy",
+
+      "description": "Maize requires moderate moisture and warm temperatures."
+    },
+
+    {
+      "id": 4,
+      "name": "Potato",
+      "emoji": "🥔",
+
+      "season": "Rabi",
+
+      "duration": "90-120 Days",
+
+      "idealConditions": {
+        "temperature": {
+          "min": 15,
+          "max": 22
+        },
+
+        "humidity": {
+          "min": 60,
+          "max": 80
+        },
+
+        "soilMoisture": {
+          "min": 60,
+          "max": 80
+        }
+      },
+
+      "water": {
+        "requirement": "18 mm/day",
+        "bestTime": "Morning",
+        "frequency": "Every 2 Days"
+      },
+
+      "fertilizer": {
+        "nitrogen": "Moderate",
+        "phosphorus": "High",
+        "potassium": "High"
+      },
+
+      "soilType": "Sandy Loam",
+
+      "description": "Potatoes require cool temperatures and consistent soil moisture."
+    },
+
+    {
+      "id": 5,
+      "name": "Tomato",
+      "emoji": "🍅",
+
+      "season": "All Season",
+
+      "duration": "70-100 Days",
+
+      "idealConditions": {
+
+        "temperature": {
+          "min": 20,
+          "max": 30
+        },
+
+        "humidity": {
+          "min": 60,
+          "max": 80
+        },
+
+        "soilMoisture": {
+          "min": 50,
+          "max": 70
+        }
+      },
+
+      "water": {
+        "requirement": "12-15 mm/day",
+        "bestTime": "Morning",
+        "frequency": "Daily"
+      },
+
+      "fertilizer": {
+        "nitrogen": "Low",
+        "phosphorus": "Medium",
+        "potassium": "High"
+      },
+
+      "soilType": "Well-drained Loamy",
+
+      "description": "Tomatoes require balanced irrigation and warm temperatures."
+    }
+  ]
+}

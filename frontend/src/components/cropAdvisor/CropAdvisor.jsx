@@ -1,18 +1,21 @@
 import { useState } from "react";
 import cropsData from "../../data/crops.json";
 import { useSensor } from "../../context/SensorContext";
+import { analyzeCrop } from "../../utils/cropAnalysis";
+
 
 import CropSelector from "./CropSelector";
 import CropOverview from "./CropOverview";
 import RecommendationCard from "./RecommendationCard";
 import ActionPlan from "./ActionPlan";
-
 function CropAdvisor() {
   const sensor = useSensor();
 
   const [selectedCrop, setSelectedCrop] = useState(
     cropsData.crops[0]
   );
+
+  const analysis = analyzeCrop(sensor, selectedCrop);
 
   const handleCropChange = (cropName) => {
     const crop = cropsData.crops.find(
@@ -23,7 +26,10 @@ function CropAdvisor() {
   };
 
   return (
-    <section className="bg-[#0F172A] py-24">
+    <section
+      id="crop-advisor"
+      className="bg-[#0F172A] py-24"
+    >
       <div className="mx-auto max-w-7xl px-6">
 
         {/* =======================================================
@@ -116,52 +122,31 @@ function CropAdvisor() {
             OVERVIEW
         ======================================================= */}
 
-        <CropOverview
-          crop={selectedCrop}
-          sensor={sensor}
-        />
+       <CropOverview
+  crop={selectedCrop}
+  sensor={sensor}
+  analysis={analysis}
+/>
                 {/* =======================================================
             SMART RECOMMENDATIONS
         ======================================================= */}
+<div className="mt-10 grid gap-6 md:grid-cols-2">
 
-        <div className="mt-10 grid gap-6 lg:grid-cols-2">
+  <RecommendationCard
+    title="💧 Irrigation Recommendation"
+    recommendation={analysis.irrigation.message}
+    value={analysis.irrigation.value}
+    footer={`Best Time: ${selectedCrop.water.bestTime}`}
+  />
 
-          <RecommendationCard
-            title="💧 Irrigation Recommendation"
-            icon="💧"
-            color="#2563eb33"
-            recommendation={
-              sensor.connected
-                ? sensor.soil < 40
-                  ? "Soil moisture is low. Irrigation is recommended immediately."
-                  : "Soil moisture is within the ideal range. Irrigation is not required now."
-                : "Waiting for live sensor data."
-            }
-            value={
-              sensor.connected
-                ? sensor.soil < 40
-                  ? "25–30 mm Water"
-                  : "No Irrigation"
-                : "--"
-            }
-            footer="Best irrigation time: Early Morning (6 AM – 8 AM)"
-          />
+  <RecommendationCard
+    title="🌱 Fertilizer Recommendation"
+    recommendation={analysis.fertilizer.message}
+    value={analysis.fertilizer.title}
+    footer={selectedCrop.fertilizer.nitrogen}
+  />
 
-          <RecommendationCard
-            title="🌱 Fertilizer Recommendation"
-            icon="🌱"
-            color="#22c55e33"
-            recommendation={
-              sensor.connected
-                ? "Nitrogen fertilizer is recommended after irrigation for better nutrient absorption."
-                : "Waiting for sensor data."
-            }
-            value="Nitrogen Recommended"
-            footer="Apply fertilizer only when soil moisture is sufficient."
-          />
-
-        </div>
-
+</div>
         {/* =======================================================
             TODAY'S ACTION PLAN
         ======================================================= */}
@@ -170,49 +155,10 @@ function CropAdvisor() {
           <ActionPlan />
         </div>
 
-        {/* =======================================================
-            IDEAL CONDITIONS
-        ======================================================= */}
+       
 
-        <div className="mt-10 rounded-3xl border border-slate-700 bg-[#111827] p-8">
-
-          <h3 className="mb-8 text-2xl font-bold text-white">
-            🌡 Ideal Growing Conditions
-          </h3>
-
-          <div className="grid gap-6 md:grid-cols-4">
-
-            <div className="rounded-2xl bg-[#1E293B] p-6 text-center">
-              <h4 className="text-slate-400">Temperature</h4>
-              <p className="mt-3 text-3xl font-bold text-green-400">
-                {selectedCrop.temperature}
-              </p>
-            </div>
-
-            <div className="rounded-2xl bg-[#1E293B] p-6 text-center">
-              <h4 className="text-slate-400">Humidity</h4>
-              <p className="mt-3 text-3xl font-bold text-cyan-400">
-                {selectedCrop.humidity}
-              </p>
-            </div>
-
-            <div className="rounded-2xl bg-[#1E293B] p-6 text-center">
-              <h4 className="text-slate-400">Soil Moisture</h4>
-              <p className="mt-3 text-3xl font-bold text-yellow-400">
-                {selectedCrop.soilMoisture}
-              </p>
-            </div>
-
-            <div className="rounded-2xl bg-[#1E293B] p-6 text-center">
-              <h4 className="text-slate-400">Air Quality</h4>
-              <p className="mt-3 text-3xl font-bold text-green-400">
-                Good
-              </p>
-            </div>
-
-          </div>
-
-        </div>
+       
+    
 
       </div>
     </section>

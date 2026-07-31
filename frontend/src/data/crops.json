@@ -6,205 +6,543 @@
       "emoji": "🌾",
       "season": "Kharif",
       "duration": "120-150 Days",
-
+      "description": "Rice requires high moisture, warm temperatures, and standing water during most of its growing period.",
+      "soilType": [
+        "Clay",
+        "Clay Loam",
+        "Loamy"
+      ],
       "idealConditions": {
         "temperature": {
           "min": 25,
-          "max": 35
+          "max": 35,
+          "ideal": "28-32°C"
         },
         "humidity": {
           "min": 70,
-          "max": 90
+          "max": 90,
+          "ideal": "75-85%"
         },
         "soilMoisture": {
           "min": 70,
-          "max": 90
+          "max": 90,
+          "ideal": "75-85%"
+        },
+        "airQuality": {
+          "max": 150,
+          "ideal": "<150 AQI"
         }
       },
-
       "water": {
         "requirement": "25-30 mm/day",
-        "bestTime": "6:00 AM - 8:00 AM",
-        "frequency": "Daily"
+        "frequency": "Daily",
+        "bestTime": "6:00 AM - 8:00 AM"
       },
-
       "fertilizer": {
-        "nitrogen": "Recommended after irrigation",
+        "nitrogen": "Apply after irrigation",
         "phosphorus": "Apply during early growth",
         "potassium": "Apply during flowering"
       },
-
-      "soilType": "Clay or Loamy",
-
-      "description": "Rice requires high moisture and warm climatic conditions."
+      "irrigationGuide": {
+        "critical": 30,
+        "low": 50,
+        "good": 70,
+        "excellent": 90
+      },
+      "healthWeights": {
+        "temperature": 30,
+        "humidity": 25,
+        "soilMoisture": 35,
+        "airQuality": 10
+      },
+      "recommendations": {
+        "temperature": {
+          "low": "Temperature is below the ideal range. Crop growth may slow down.",
+          "ideal": "Temperature is ideal for healthy rice growth.",
+          "high": "High temperature detected. Irrigate during evening hours."
+        },
+        "humidity": {
+          "low": "Humidity is lower than recommended. Increase irrigation if needed.",
+          "ideal": "Humidity is optimal.",
+          "high": "High humidity may increase fungal disease risk."
+        },
+        "soilMoisture": {
+          "critical": "Soil is extremely dry. Irrigate immediately.",
+          "low": "Soil moisture is low. Moderate irrigation recommended.",
+          "good": "Soil moisture is suitable.",
+          "high": "Soil is over-watered. Stop irrigation temporarily."
+        },
+        "airQuality": {
+          "good": "Air quality is suitable for crop growth.",
+          "poor": "Poor air quality may reduce plant health."
+        }
+      },
+      "diseaseRisk": [
+        {
+          "name": "Leaf Blast",
+          "condition": "humidity > 90",
+          "risk": "High humidity may promote fungal infection."
+        },
+        {
+          "name": "Heat Stress",
+          "condition": "temperature > 36",
+          "risk": "Very high temperature can reduce crop yield."
+        }
+      ],
+      "weather": {
+        "rainTolerance": "High",
+        "droughtTolerance": "Low",
+        "floodTolerance": "High"
+      },
+      "tips": [
+        "Maintain standing water during vegetative stage.",
+        "Avoid water stagnation during harvesting.",
+        "Monitor humidity during flowering stage."
+      ],
+      "aiPrompt": {
+        "healthy": "Current environmental conditions are favorable for rice cultivation.",
+        "warning": "One or more environmental parameters require attention.",
+        "critical": "Immediate corrective action is recommended to avoid crop stress."
+      }
     },
-
-    {
+        {
       "id": 2,
       "name": "Wheat",
       "emoji": "🌾",
       "season": "Rabi",
       "duration": "110-130 Days",
-
+      "description": "Wheat grows best in cool, dry weather during its early growth and warm, sunny weather during ripening.",
+      "soilType": [
+        "Clay Loam",
+        "Loamy",
+        "Silt Loam"
+      ],
       "idealConditions": {
         "temperature": {
-          "min": 15,
-          "max": 25
+          "min": 12,
+          "max": 25,
+          "ideal": "15-22°C"
         },
         "humidity": {
-          "min": 40,
-          "max": 70
+          "min": 50,
+          "max": 70,
+          "ideal": "55-65%"
         },
         "soilMoisture": {
           "min": 40,
-          "max": 60
+          "max": 60,
+          "ideal": "45-55%"
+        },
+        "airQuality": {
+          "max": 150,
+          "ideal": "<150 AQI"
         }
       },
-
       "water": {
-        "requirement": "15-20 mm/day",
-        "bestTime": "7:00 AM",
-        "frequency": "Every 3 Days"
+        "requirement": "4-6 mm/day",
+        "frequency": "Every 10-12 Days",
+        "bestTime": "7:00 AM - 9:00 AM"
       },
-
       "fertilizer": {
-        "nitrogen": "Apply after first irrigation",
-        "phosphorus": "Recommended before sowing",
-        "potassium": "Optional"
+        "nitrogen": "Apply half at crown root initiation and half at tillering",
+        "phosphorus": "Apply full dose as basal application during sowing",
+        "potassium": "Apply along with phosphorus during basal application"
       },
-
-      "soilType": "Loamy",
-
-      "description": "Wheat grows best in cool weather and moderate soil moisture."
+      "irrigationGuide": {
+        "critical": 20,
+        "low": 40,
+        "good": 55,
+        "excellent": 70
+      },
+      "healthWeights": {
+        "temperature": 35,
+        "humidity": 20,
+        "soilMoisture": 35,
+        "airQuality": 10
+      },
+      "recommendations": {
+        "temperature": {
+          "low": "Temperature is colder than ideal. Frost protection may be needed during early stages.",
+          "ideal": "Temperature is optimal for grain filling and maturation.",
+          "high": "High temperature during terminal growth stage may cause forced maturity."
+        },
+        "humidity": {
+          "low": "Low humidity is acceptable, but ensure adequate soil moisture during tillering.",
+          "ideal": "Humidity is optimal.",
+          "high": "High humidity increases vulnerability to rust and powdery mildew."
+        },
+        "soilMoisture": {
+          "critical": "Severe moisture stress detected. Irrigate immediately at critical stages.",
+          "low": "Soil moisture is low. Schedule irrigation soon.",
+          "good": "Soil moisture level is adequate.",
+          "high": "Excess moisture detected. Prevent waterlogging to protect roots."
+        },
+        "airQuality": {
+          "good": "Air quality is suitable for crop growth.",
+          "poor": "High pollution levels may impair photosynthetic activity."
+        }
+      },
+      "diseaseRisk": [
+        {
+          "name": "Rust Disease",
+          "condition": "High humidity",
+          "risk": "High humidity favors rust infection."
+        },
+        {
+          "name": "Powdery Mildew",
+          "condition": "Cool and humid weather",
+          "risk": "Cool, humid conditions promote powdery mildew."
+        },
+        {
+          "name": "Loose Smut",
+          "condition": "Seed borne",
+          "risk": "Use certified treated seeds to reduce infection."
+        }
+      ],
+      "weather": {
+        "rainTolerance": "Medium",
+        "droughtTolerance": "Medium",
+        "floodTolerance": "Low"
+      },
+      "tips": [
+        "Ensure first irrigation at Crown Root Initiation stage (20-25 days after sowing).",
+        "Avoid heavy irrigation during strong winds to prevent lodging.",
+        "Maintain adequate spacing for optimal sunlight penetration."
+      ],
+      "aiPrompt": {
+        "healthy": "Environmental conditions are optimal for wheat growth and grain maturation.",
+        "warning": "Certain environmental metrics deviate from the target range for wheat.",
+        "critical": "Critical environmental conditions detected. Action required to safeguard wheat yield."
+      }
     },
-
-    {
+        {
       "id": 3,
       "name": "Maize",
       "emoji": "🌽",
-      "season": "Kharif",
-
-      "duration": "90-120 Days",
-
+      "season": "Kharif / Rabi",
+      "duration": "90-110 Days",
+      "description": "Maize thrives in well-drained fertile soils with plenty of sunshine and warm growing temperatures.",
+      "soilType": [
+        "Sandy Loam",
+        "Loamy",
+        "Silt Loam"
+      ],
       "idealConditions": {
         "temperature": {
-          "min": 20,
-          "max": 30
+          "min": 18,
+          "max": 32,
+          "ideal": "21-27°C"
         },
-
         "humidity": {
           "min": 50,
-          "max": 80
+          "max": 80,
+          "ideal": "60-70%"
         },
-
         "soilMoisture": {
           "min": 50,
-          "max": 70
+          "max": 70,
+          "ideal": "55-65%"
+        },
+        "airQuality": {
+          "max": 150,
+          "ideal": "<150 AQI"
         }
       },
-
       "water": {
-        "requirement": "20 mm/day",
-        "bestTime": "Morning",
-        "frequency": "Every 2 Days"
+        "requirement": "5-8 mm/day",
+        "frequency": "Every 7-10 Days",
+        "bestTime": "6:30 AM - 8:30 AM"
       },
-
       "fertilizer": {
-        "nitrogen": "Required",
-        "phosphorus": "Required",
-        "potassium": "Required"
+        "nitrogen": "Split into 3 doses: sowing, knee-high stage, and tasseling",
+        "phosphorus": "Apply full dose as basal application during land preparation",
+        "potassium": "Apply half as basal and half during knee-high stage"
       },
-
-      "soilType": "Well-drained Loamy",
-
-      "description": "Maize requires moderate moisture and warm temperatures."
+      "irrigationGuide": {
+        "critical": 25,
+        "low": 45,
+        "good": 65,
+        "excellent": 80
+      },
+      "healthWeights": {
+        "temperature": 30,
+        "humidity": 20,
+        "soilMoisture": 40,
+        "airQuality": 10
+      },
+      "recommendations": {
+        "temperature": {
+          "low": "Low temperatures may delay germination and early vegetative growth.",
+          "ideal": "Temperature is well-suited for photosynthetic performance.",
+          "high": "Excessive heat during pollination can reduce grain set and cob size."
+        },
+        "humidity": {
+          "low": "Dry air may accelerate evapotranspiration. Maintain root zone moisture.",
+          "ideal": "Humidity levels are balanced.",
+          "high": "High humidity combined with warm weather increases leaf blight risks."
+        },
+        "soilMoisture": {
+          "critical": "Critical moisture depletion. Irrigate immediately to protect tasseling stage.",
+          "low": "Soil moisture is below optimal. Irrigation recommended within 48 hours.",
+          "good": "Soil moisture is ideal for crop development.",
+          "high": "Over-saturated soil detected. Maize is highly sensitive to waterlogging."
+        },
+        "airQuality": {
+          "good": "Air quality is good for health and growth.",
+          "poor": "Elevated atmospheric pollutants may cause mild leaf necrosis."
+        }
+      },
+      "diseaseRisk": [
+        {
+          "name": "Maydis Leaf Blight",
+          "condition": "High humidity and warm weather",
+          "risk": "Fungal disease that spreads rapidly under humid conditions."
+        },
+        {
+          "name": "Turcicum Leaf Blight",
+          "condition": "Cool, moist weather",
+          "risk": "Can significantly reduce photosynthesis and grain yield."
+        },
+        {
+          "name": "Stalk Rot",
+          "condition": "Poor drainage and waterlogging",
+          "risk": "Weakens plant stems and increases lodging risk."
+        }
+      ],
+      "weather": {
+        "rainTolerance": "Medium",
+        "droughtTolerance": "Medium",
+        "floodTolerance": "Low"
+      },
+      "tips": [
+        "Avoid water stagnation as maize roots are highly susceptible to oxygen deficiency.",
+        "Critical water requirements occur during tasseling and silking stages.",
+        "Ensure adequate nitrogen top-dressing at knee-high stage."
+      ],
+      "aiPrompt": {
+        "healthy": "Maize microclimate and soil moisture levels are balanced.",
+        "warning": "Elevated stress detected in current weather or soil metrics.",
+        "critical": "Immediate field management required to prevent yield loss in maize crop."
+      }
     },
-
-    {
+        {
       "id": 4,
       "name": "Potato",
       "emoji": "🥔",
-
       "season": "Rabi",
-
       "duration": "90-120 Days",
-
+      "description": "Potato requires cool weather, well-drained loose soil, and consistent moisture for tuber initiation and enlargement.",
+      "soilType": [
+        "Sandy Loam",
+        "Loamy",
+        "Alluvial"
+      ],
       "idealConditions": {
         "temperature": {
           "min": 15,
-          "max": 22
+          "max": 24,
+          "ideal": "18-22°C"
         },
-
         "humidity": {
           "min": 60,
-          "max": 80
+          "max": 80,
+          "ideal": "65-75%"
         },
-
         "soilMoisture": {
           "min": 60,
-          "max": 80
+          "max": 80,
+          "ideal": "65-75%"
+        },
+        "airQuality": {
+          "max": 150,
+          "ideal": "<150 AQI"
         }
       },
-
       "water": {
-        "requirement": "18 mm/day",
-        "bestTime": "Morning",
-        "frequency": "Every 2 Days"
+        "requirement": "4-7 mm/day",
+        "frequency": "Every 5-7 Days",
+        "bestTime": "7:00 AM - 9:00 AM"
       },
-
       "fertilizer": {
-        "nitrogen": "Moderate",
-        "phosphorus": "High",
-        "potassium": "High"
+        "nitrogen": "Apply half as basal and half during earthing-up stage",
+        "phosphorus": "Apply full dose as basal application in furrow",
+        "potassium": "Apply full dose as basal to enhance tuber development and quality"
       },
-
-      "soilType": "Sandy Loam",
-
-      "description": "Potatoes require cool temperatures and consistent soil moisture."
-    },
-
-    {
+      "irrigationGuide": {
+        "critical": 35,
+        "low": 55,
+        "good": 70,
+        "excellent": 85
+      },
+      "healthWeights": {
+        "temperature": 35,
+        "humidity": 25,
+        "soilMoisture": 30,
+        "airQuality": 10
+      },
+      "recommendations": {
+        "temperature": {
+          "low": "Temperatures below 10°C slow tuber growth and increase frost risk.",
+          "ideal": "Temperature is optimal for tuberization.",
+          "high": "Night temperatures above 20°C hinder tuber enlargement."
+        },
+        "humidity": {
+          "low": "Low air humidity accelerates leaf water loss. Maintain uniform irrigation.",
+          "ideal": "Humidity range is within favorable limits.",
+          "high": "High humidity coupled with cool weather creates favorable conditions for late blight."
+        },
+        "soilMoisture": {
+          "critical": "Severe water deficiency. Irrigate promptly to prevent tuber cracking.",
+          "low": "Moisture level is low. Light sprinkler or furrow irrigation recommended.",
+          "good": "Soil moisture is optimal for vegetative and tuber stages.",
+          "high": "Excess moisture promotes tuber rot and poor aeration. Reduce irrigation."
+        },
+        "airQuality": {
+          "good": "Air quality is suitable for normal crop physiology.",
+          "poor": "Poor air quality can stunt canopy accumulation."
+        }
+      },
+      "diseaseRisk": [
+        {
+          "name": "Late Blight",
+          "condition": "Cool and humid weather",
+          "risk": "Highly destructive fungal disease; monitor humidity closely."
+        },
+        {
+          "name": "Early Blight",
+          "condition": "Warm temperatures with intermittent moisture",
+          "risk": "Can reduce foliage health and tuber yield."
+        },
+        {
+          "name": "Common Scab",
+          "condition": "Dry soil during tuber formation",
+          "risk": "Maintain adequate soil moisture to reduce infection."
+        }
+      ],
+      "weather": {
+        "rainTolerance": "Low",
+        "droughtTolerance": "Low",
+        "floodTolerance": "Low"
+      },
+      "tips": [
+        "Perform earthing-up 30 days after planting to prevent tuber greening.",
+        "Maintain consistent moisture; fluctuating dry and wet cycles cause knobby tubers.",
+        "Stop irrigation 10-15 days prior to harvesting to harden potato skin."
+      ],
+      "aiPrompt": {
+        "healthy": "Growing conditions are optimal for potato vegetative growth and tuber development.",
+        "warning": "Sub-optimal conditions observed; field monitoring recommended.",
+        "critical": "Critical environmental risk detected. Take immediate preventive measures."
+      }
+    },    {
       "id": 5,
       "name": "Tomato",
       "emoji": "🍅",
-
-      "season": "All Season",
-
-      "duration": "70-100 Days",
-
+      "season": "Kharif / Rabi / Summer",
+      "duration": "120-150 Days",
+      "description": "Tomato is a warm-season crop requiring abundant sunshine, moderate humidity, and well-drained nutrient-rich soil.",
+      "soilType": [
+        "Sandy Loam",
+        "Loamy",
+        "Clay Loam"
+      ],
       "idealConditions": {
-
         "temperature": {
-          "min": 20,
-          "max": 30
+          "min": 18,
+          "max": 30,
+          "ideal": "21-26°C"
         },
-
         "humidity": {
-          "min": 60,
-          "max": 80
-        },
-
-        "soilMoisture": {
           "min": 50,
-          "max": 70
+          "max": 75,
+          "ideal": "60-70%"
+        },
+        "soilMoisture": {
+          "min": 55,
+          "max": 75,
+          "ideal": "60-70%"
+        },
+        "airQuality": {
+          "max": 150,
+          "ideal": "<150 AQI"
         }
       },
-
       "water": {
-        "requirement": "12-15 mm/day",
-        "bestTime": "Morning",
-        "frequency": "Daily"
+        "requirement": "5-7 mm/day",
+        "frequency": "Every 3-5 Days",
+        "bestTime": "6:00 AM - 8:00 AM"
       },
-
       "fertilizer": {
-        "nitrogen": "Low",
-        "phosphorus": "Medium",
-        "potassium": "High"
+        "nitrogen": "Apply in 3 split doses: basal, 30 days after transplanting, and fruit set",
+        "phosphorus": "Apply complete dose at soil preparation",
+        "potassium": "Apply split doses along with nitrogen to support continuous fruiting"
       },
-
-      "soilType": "Well-drained Loamy",
-
-      "description": "Tomatoes require balanced irrigation and warm temperatures."
+      "irrigationGuide": {
+        "critical": 30,
+        "low": 50,
+        "good": 68,
+        "excellent": 85
+      },
+      "healthWeights": {
+        "temperature": 30,
+        "humidity": 25,
+        "soilMoisture": 35,
+        "airQuality": 10
+      },
+      "recommendations": {
+        "temperature": {
+          "low": "Cool temperatures below 15°C reduce pollen viability and fruit set.",
+          "ideal": "Temperature is ideal for flowering, fruiting, and color development.",
+          "high": "Temperatures above 32°C lead to flower drop and poor fruit development."
+        },
+        "humidity": {
+          "low": "Very dry conditions increase risk of blossom end rot if watering is irregular.",
+          "ideal": "Humidity level supports optimal canopy growth.",
+          "high": "High relative humidity promotes fungal pathogens like early blight and wilt."
+        },
+        "soilMoisture": {
+          "critical": "Severe moisture stress. Water immediately to avoid blossom drop and wilt.",
+          "low": "Soil moisture is declining. Apply drip irrigation.",
+          "good": "Moisture levels are optimal for fruit development.",
+          "high": "Excess moisture causes root suffocation and fruit cracking."
+        },
+        "airQuality": {
+          "good": "Air quality is good for plant respiration.",
+          "poor": "High pollution levels can damage delicate leaf tissues."
+        }
+      },
+      "diseaseRisk": [
+        {
+          "name": "Tomato Leaf Curl Virus",
+          "condition": "High whitefly population",
+          "risk": "Monitor vectors and remove infected plants promptly."
+        },
+        {
+          "name": "Early Blight",
+          "condition": "Warm and humid weather",
+          "risk": "Maintain airflow and apply preventive fungicides if necessary."
+        },
+        {
+          "name": "Bacterial Wilt",
+          "condition": "Poor soil drainage",
+          "risk": "Improve drainage and rotate crops to reduce disease pressure."
+        }
+      ],
+      "weather": {
+        "rainTolerance": "Low",
+        "droughtTolerance": "Medium",
+        "floodTolerance": "Low"
+      },
+      "tips": [
+        "Use drip irrigation to keep foliage dry and prevent fungal leaf spot diseases.",
+        "Maintain consistent moisture levels to prevent Blossom End Rot.",
+        "Provide staking or trellising for indeterminate varieties to keep fruit off the ground."
+      ],
+      "aiPrompt": {
+        "healthy": "Environmental variables are optimal for healthy tomato growth and fruit production.",
+        "warning": "Environmental stress factors detected; review crop health parameters.",
+        "critical": "Severe environmental imbalance. Prompt intervention is required to avoid crop damage."
+      }
     }
   ]
 }

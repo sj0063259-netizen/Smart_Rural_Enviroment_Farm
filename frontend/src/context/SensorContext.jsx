@@ -4,6 +4,27 @@ import socket from "../services/socket";
 
 const SensorContext = createContext();
 
+// ==============================
+// Pump Configuration
+// ==============================
+
+const SOIL_THRESHOLD = 55;
+const PUMP_MODE = "AUTO";
+
+// ==============================
+// Helper Function
+// ==============================
+
+function getPumpStatus(soil) {
+  if (soil == null) return false;
+
+  // Ignore invalid readings
+  if (soil < 0 || soil > 100) return false;
+
+  // Pump ON if soil is dry
+  return soil < SOIL_THRESHOLD;
+}
+
 export function SensorProvider({ children }) {
   const [sensorData, setSensorData] = useState({
     temperature: null,
@@ -12,18 +33,29 @@ export function SensorProvider({ children }) {
     airQuality: null,
     battery: null,
 
+    pumpStatus: false,
+    mode: PUMP_MODE,
+
     connected: false,
     lastUpdated: null,
 
-    // Stores last 20 readings for charts
     history: [],
   });
 
   useEffect(() => {
-    async function loadLatestData() {
-      const response = await getLatestData();
 
-      if (response && response.success) {
+    // ==============================
+    // Load Latest Data
+    // ==============================
+
+    async function loadLatestData() {
+      try {
+        const response = await getLatestData();
+
+        if (!response?.success) return;
+
+        const latestData = response.data;
+
         const currentTime = new Date().toLocaleTimeString([], {
           hour: "2-digit",
           minute: "2-digit",
@@ -31,24 +63,35 @@ export function SensorProvider({ children }) {
         });
 
         setSensorData({
-          ...response.data,
+          ...latestData,
+
+          pumpStatus: getPumpStatus(latestData.soil),
+          mode: PUMP_MODE,
+
           connected: true,
           lastUpdated: currentTime,
 
           history: [
             {
-              ...response.data,
+              ...latestData,
               time: currentTime,
             },
           ],
         });
+
+      } catch (error) {
+        console.error("❌ Failed to load latest sensor data", error);
       }
     }
 
     loadLatestData();
 
-    // Listen for live ESP32 data
+    // ==============================
+    // Live ESP32 Data
+    // ==============================
+
     socket.on("sensorData", (data) => {
+
       console.log("📡 Live Sensor Data:", data);
 
       const currentTime = new Date().toLocaleTimeString([], {
@@ -57,33 +100,63 @@ export function SensorProvider({ children }) {
         second: "2-digit",
       });
 
-      setSensorData((prev) => ({
-        ...data,
+      setSensorData((prev) => {
 
-        connected: true,
-        lastUpdated: currentTime,
+        // Keep previous soil value if received value is invalid
+        const soil =
+          data.soil == null ||
+          data.soil < 0 ||
+          data.soil > 100
+            ? prev.soil
+            : data.soil;
 
-        history: [
-          ...prev.history,
-          {
-            ...data,
-            time: currentTime,
-          },
-        ].slice(-20),
-      }));
+        return {
+          ...data,
+
+          soil,
+
+          pumpStatus: getPumpStatus(soil),
+
+          mode: PUMP_MODE,
+
+          connected: true,
+
+          lastUpdated: currentTime,
+
+          history: [
+            ...prev.history,
+            {
+              ...data,
+              soil,
+              time: currentTime,
+            },
+          ].slice(-20),
+        };
+      });
+
     });
+
+    // ==============================
+    // Socket Connected
+    // ==============================
 
     socket.on("connect", () => {
       console.log("🟢 Connected to Backend");
     });
 
+    // ==============================
+    // Socket Disconnected
+    // ==============================
+
     socket.on("disconnect", () => {
+
       console.log("🔴 Backend Disconnected");
 
       setSensorData((prev) => ({
         ...prev,
         connected: false,
       }));
+
     });
 
     return () => {
@@ -91,6 +164,7 @@ export function SensorProvider({ children }) {
       socket.off("connect");
       socket.off("disconnect");
     };
+
   }, []);
 
   return (

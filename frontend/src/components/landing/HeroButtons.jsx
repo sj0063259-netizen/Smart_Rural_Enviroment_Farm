@@ -4,7 +4,7 @@ export default function HeroButtons() {
   return (
     <div className="mt-12 flex flex-wrap justify-center gap-5">
       <a
-        href="#dashboard"
+        href="#crop-advisor"
         className="group inline-flex items-center gap-2 rounded-xl bg-green-500 px-7 py-4 font-semibold text-slate-950 transition-all duration-300 hover:-translate-y-1 hover:bg-green-400 hover:shadow-xl hover:shadow-green-500/30"
       >
         <Activity size={18} />

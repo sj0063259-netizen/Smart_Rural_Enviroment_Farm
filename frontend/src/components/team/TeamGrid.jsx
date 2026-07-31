@@ -11,7 +11,7 @@ const teamMembers = [
     skills: ["ESP32", "Embedded C", "IoT", "Sensors"],
 
     github: "https://github.com/amanchaudhary63067-cmd",
-    linkedin: "www.linkedin.com/in/aman-chaudhary-839206380",
+    linkedin: "https://www.linkedin.com/in/aman-chaudhary-839206380/",
   },
 
   {
